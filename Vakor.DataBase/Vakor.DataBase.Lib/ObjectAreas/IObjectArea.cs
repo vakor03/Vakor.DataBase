@@ -6,10 +6,10 @@ namespace Vakor.DataBase.Lib.ObjectAreas
     {
         public const string AreaName = ".objectArea";
         string[] GenerateOutputData();
-        void AddRecord(string recordData);
+        IRecord AddRecord(string recordData);
         void RemoveRecord(int key);
-        IRecord SearchRecord(int key);
+        IRecord SearchRecord(int key, out int iterationIndex);
         void Resize();
-        void AddRecord(IRecord recordData);
+        IRecord AddRecord(IRecord recordData);
     }
 }

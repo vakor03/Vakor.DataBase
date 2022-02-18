@@ -11,7 +11,8 @@ namespace Vakor.DataBase.Lib.ObjectAreas.RecordBlocks
 
         public IRecord this[int i]
         {
-            get {
+            get
+            {
                 if (i < Records.Count)
                 {
                     return Records[i];
@@ -21,17 +22,32 @@ namespace Vakor.DataBase.Lib.ObjectAreas.RecordBlocks
             }
         }
 
-        public IRecord SearchRecord(int key)
+        public IRecord SearchRecord(int key, out int iterationIndex)
         {
+            iterationIndex = 0;
+            if (Records.Count == 0)
+            {
+                iterationIndex = -1;
+                return null;
+            }
+
             int first = 0;
             int last = Records.Count;
             while (first <= last)
             {
+                iterationIndex++;
                 int middle = (first + last) / 2;
+                if (middle >= Records.Count)
+                {
+                    iterationIndex = -1;
+                    return null;
+                }
+
                 if (key < Records[middle].Key)
                 {
                     last = middle - 1;
-                }else if (key > Records[middle].Key)
+                }
+                else if (key > Records[middle].Key)
                 {
                     first = middle + 1;
                 }
@@ -40,7 +56,8 @@ namespace Vakor.DataBase.Lib.ObjectAreas.RecordBlocks
                     return Records[middle];
                 }
             }
-            throw new ArgumentOutOfRangeException();
+
+            return null;
         }
 
         public void Add(IRecord record)
@@ -51,7 +68,7 @@ namespace Vakor.DataBase.Lib.ObjectAreas.RecordBlocks
 
         public void Delete(int recordKey)
         {
-            Delete(SearchRecord(recordKey));
+            Delete(SearchRecord(recordKey, out _));
         }
 
         public void Delete(IRecord record)

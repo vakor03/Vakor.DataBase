@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Vakor.DataBase.Lib.IndexAreas;
 using Vakor.DataBase.Lib.ObjectAreas;
+using Vakor.DataBase.Lib.ObjectAreas.RecordBlocks.Records;
 
 namespace Vakor.DataBase.Lib.DataBases
 {
@@ -10,10 +11,10 @@ namespace Vakor.DataBase.Lib.DataBases
 
         IIndexArea IndexArea { get; set; }
         IObjectArea ObjectArea { get; set; }
-        void Add(string recordData);
-        void Add(int key, string recordData);
+        IRecord Add(string recordData);
+        IRecord Add(int key, string recordData);
         void Remove(int key);
-        string Search(int key);
+        IRecord Search(int key, out int searchIterator);
         void CreateDataBase(int capacity);
         void SaveChanges();
         void OpenConnection();

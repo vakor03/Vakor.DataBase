@@ -6,7 +6,8 @@ namespace Vakor.DataBase.Lib.Configurations
 
     {
         public int LastIndex { get; set; }
-        public int BlocksCount { get; set; } = 10;
+        public int MaxCapacity => BlocksCount * BlockCapacity;
+        public int BlocksCount { get; set; } = 100;
         public int BlockCapacity { get; set; }
 
         public Configuration()
@@ -45,7 +46,7 @@ namespace Vakor.DataBase.Lib.Configurations
 
         public void ChangeMaxCapacity(double extendCapacity)
         {
-            BlockCapacity = (int)(BlockCapacity * extendCapacity);
+            BlockCapacity = (int)Math.Ceiling(BlockCapacity * extendCapacity);
         }
     }
 }

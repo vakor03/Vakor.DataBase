@@ -47,15 +47,22 @@ namespace Vakor.DataBase.Lib.ObjectAreas
             return outputData;
         }
 
-        public void AddRecord(string recordData)
+        public IRecord AddRecord(string recordData)
         {
+            IRecord record = new Record(_configuration.LastIndex++, recordData);
             RecordBlocks[_configuration.LastIndex / _configuration.BlockCapacity]
-                .Add(new Record(_configuration.LastIndex++, recordData));
+                .Add(record);
+            return record;
         }
 
-        public void AddRecord(IRecord recordData)
+        public IRecord AddRecord(IRecord recordData)
         {
-            RecordBlocks[recordData.Key/_configuration.BlockCapacity].Add(recordData);
+            if (SearchRecord(recordData.Key,out _)!=null)
+            {
+                RemoveRecord(SearchRecord(recordData.Key, out _).Key);                
+            }
+            RecordBlocks[recordData.Key / _configuration.BlockCapacity].Add(recordData);
+            return recordData;
         }
 
         public void RemoveRecord(int key)
@@ -64,9 +71,14 @@ namespace Vakor.DataBase.Lib.ObjectAreas
             RecordBlocks[blockId].Delete(key);
         }
 
-        public IRecord SearchRecord(int key)
+        public IRecord SearchRecord(int key, out int iterationIndex)
         {
-            return RecordBlocks[key / _configuration.BlockCapacity].SearchRecord(key);
+            if (key> _configuration.MaxCapacity)
+            {
+                iterationIndex = -1;
+                return null;
+            }
+            return RecordBlocks[key / _configuration.BlockCapacity].SearchRecord(key, out iterationIndex);
         }
 
         public void Resize()

@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vakor.DataBase.Lib", "Vakor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vakor.DataBase.ConsoleApp", "Vakor.DataBase.ConsoleApp\Vakor.DataBase.ConsoleApp.csproj", "{4F3BFE7C-9B1F-4456-ACB0-09337A7DAF48}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vakor.DataBase.WpfApp", "Vakor.DataBase.WpfApp\Vakor.DataBase.WpfApp.csproj", "{F10C3B49-E556-4A9F-9998-BB8681CBEFF6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{4F3BFE7C-9B1F-4456-ACB0-09337A7DAF48}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F3BFE7C-9B1F-4456-ACB0-09337A7DAF48}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F3BFE7C-9B1F-4456-ACB0-09337A7DAF48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F10C3B49-E556-4A9F-9998-BB8681CBEFF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F10C3B49-E556-4A9F-9998-BB8681CBEFF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F10C3B49-E556-4A9F-9998-BB8681CBEFF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F10C3B49-E556-4A9F-9998-BB8681CBEFF6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

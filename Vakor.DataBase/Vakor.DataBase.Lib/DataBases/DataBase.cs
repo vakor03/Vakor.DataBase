@@ -24,18 +24,29 @@ namespace Vakor.DataBase.Lib.DataBases
             _fileReader = new FileReader(PathToDBDirectory);
         }
 
-        public void Add(string recordData)
+        public IRecord Add(string recordData)
         {
-            ObjectArea.AddRecord(recordData);
+            while (Search(_configuration.LastIndex, out _) != null)
+            {
+                _configuration.LastIndex++;
+            }
+
             if (_configuration.FillIndex >= 0.9)
             {
                 Resize();
             }
+
+            return ObjectArea.AddRecord(recordData);
         }
 
-        public void Add(int key, string recordData)
+        public IRecord Add(int key, string recordData)
         {
-            ObjectArea.AddRecord(new Record(key, recordData));
+            while (key >= _configuration.MaxCapacity)
+            {
+                Resize();
+            }
+
+            return ObjectArea.AddRecord(new Record(key, recordData));
         }
 
         public void Remove(int key)
@@ -51,10 +62,10 @@ namespace Vakor.DataBase.Lib.DataBases
         }
 
 
-        public string Search(int key)
+        public IRecord Search(int key, out int searchIterator)
         {
-            var record = ObjectArea.SearchRecord(key);
-            return record.Data;
+            var record = ObjectArea.SearchRecord(key, out searchIterator);
+            return record;
         }
 
         public void CreateDataBase(int capacity)

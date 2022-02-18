@@ -11,6 +11,6 @@ namespace Vakor.DataBase.Lib.ObjectAreas.RecordBlocks
         public void Delete(int recordKey);
         public void Delete(IRecord record);
         IRecord this[int i] { get; }
-        IRecord SearchRecord(int key);
+        IRecord SearchRecord(int key, out int iterationIndex);
     }
 }

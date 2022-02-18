@@ -4,6 +4,7 @@
     {
         public const string FileName = ".config";
         int BlockCapacity { get; set; }
+        int MaxCapacity { get;}
         int BlocksCount { get; set; }
         int LastIndex { get; set; }
         double FillIndex { get; }
